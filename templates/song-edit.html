@@ -1,0 +1,41 @@
+{% extends "home-base.html"%}
+{% block title %}Edit Course{% endblock %}
+{% block page_content%}
+
+  <!-- Page Content -->
+  <div class="container">
+    <h1 class="mt-5"><i class="fa fa-icon" aria-hidden="true"></i> Edit Course:</h1>
+    <form action="/song/edit/{{song.id}}" method="post">
+      <div class="form-group">
+        <label>Name</label>
+        <input class="form-control" type="text" name="name" value="{{song.name}}" required="true">
+      </div>
+      <div class="form-group">
+        <label>Course</label>
+        <input class="form-control" type="text" name="year" >
+
+      </div>
+      <div class="form-group">
+        <label>Professor</label>
+        <select class="form-control" name="artist">
+          {% for artist in artists %}
+            {% if artist == song.artist %}
+              <option selected="selected">{{artist.name}}</option>
+            {% else %}
+              <option>{{artist.name}}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        Professor not in the list? <a href="/artist/add" class="btn btn-success" role="button" aria-disabled="true">Add Professor</a>
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea class="form-control" name="lyrics" required="true">{{song.lyrics}}</textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+  </div>
+
+{% endblock%}
